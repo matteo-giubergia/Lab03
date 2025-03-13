@@ -7,6 +7,12 @@ while(True):
 
     txtIn = input()
     # Add input control here!
+    flag = False
+    while flag == False:
+        if 1 <= int(txtIn) <= 4:
+            flag = True
+        else:
+            txtIn = input()
 
     if int(txtIn) == 1:
         print("Inserisci la tua frase in Italiano\n")

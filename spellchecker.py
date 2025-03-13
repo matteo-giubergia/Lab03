@@ -1,14 +1,26 @@
 import time
 
 import multiDictionary as md
+multidizionario = md.MultiDictionary()
 
 class SpellChecker:
 
     def __init__(self):
         pass
 
-    def handleSentence(self, txtIn, language):
-        pass
+    def handleSentence(self, txtIn, language): # e deve anche calcolare il tempo !!
+        # a cosa mi serve che abbia in input il linguaggio
+        testoDaControllare = replaceChars(txtIn).lower()
+        parole = [p for p in testoDaControllare.strip().split()]
+        multidizionario.printDic(language)
+        multidizionario.searchWord(parole, language)
+        # if language == "italian":
+        #     pass # richiedo di usare il dizionario italiano e cosi via
+        # if language == "english":
+        #     pass
+        # if language == "spanish":
+        #     pass
+        return parole, language
 
     def printMenu(self):
         print("______________________________\n" +
@@ -23,4 +35,7 @@ class SpellChecker:
 
 
 def replaceChars(text):
-    pass
+    chars = "\\`*_{}[]()>+-.!$%^;,=_~"
+    for c in chars:
+        text = text.replace(c, "")
+    return text
