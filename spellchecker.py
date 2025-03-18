@@ -1,26 +1,39 @@
-import time
 
 import multiDictionary as md
-multidizionario = md.MultiDictionary()
+
 
 class SpellChecker:
 
     def __init__(self):
         pass
 
-    def handleSentence(self, txtIn, language): # e deve anche calcolare il tempo !!
-        # a cosa mi serve che abbia in input il linguaggio
-        testoDaControllare = replaceChars(txtIn).lower()
-        parole = [p for p in testoDaControllare.strip().split()]
-        multidizionario.printDic(language)
-        multidizionario.searchWord(parole, language)
-        # if language == "italian":
-        #     pass # richiedo di usare il dizionario italiano e cosi via
-        # if language == "english":
-        #     pass
-        # if language == "spanish":
-        #     pass
-        return parole, language
+    def handleSentence(self, txtIn, language):
+        # altro modo senza cambiare la lettera iniziale della lingua nel main:
+        # language = f"{language.0].upper()}{1:len(language)}"
+        lingua = f"./resources/{language}.txt"
+        testoDaControllare = replaceChars(txtIn)
+        testoDaControllare = testoDaControllare.lower() #input minuscolo
+        parole = [p for p in testoDaControllare.strip().split(" ")]
+        multidizionario = md.MultiDictionary(lingua)
+        print("***ricerca usando contains***")
+        risultato = multidizionario.searchWord(parole)
+        for e in risultato[0]:
+            print(e)
+        print(f"contains ha impiegato {risultato[1]} secondi")
+        print("\n ***RICERCA LINEARE***")
+        risultato2 = multidizionario.searchWordLinear(parole)
+        for el in risultato2[0]:
+            print(el)
+        print(f"la ricerca lineare ha impiegato {risultato2[1]} secondi")
+        print("\n ***RICERCA DICOTOMICA***")
+        risultato3 = multidizionario.searchWordDichotomic(parole)
+        for elem in risultato3[0]:
+            print(elem)
+        print(f"la ricerca dicotomica ha impiegato {risultato3[1]} secondi")
+
+
+
+
 
     def printMenu(self):
         print("______________________________\n" +
